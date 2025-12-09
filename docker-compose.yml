@@ -34,7 +34,7 @@ services:
     image: postgres:16-alpine
     env_file:
       - .env
-    restart: always
+    restart: unless-stopped 
     networks:
       - f3Net 
     volumes:

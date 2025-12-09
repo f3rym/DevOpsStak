@@ -301,7 +301,7 @@ function Table({ frontVersion }) {
     <div>
       <p>Frontend version: {frontendVersion}</p>
       <p>Backend version: {backendVersion}</p>
-      <p>Made with 💜 by <a href="https://github.com/etoosamoe">Yuriy Semyenkov</a>.</p>
+      <p>Made with 💜 by <a href="https://github.com/f3rym">f3rym</a>.</p>
     </div>
     </div>
   );
