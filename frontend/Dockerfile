@@ -16,7 +16,7 @@ RUN npm run build
 FROM nginx:alpine3.17
 
 COPY --from=builder /app/src/build /var/www/html
-COPY --from=builder /app/src/nginx.conf /etc/nginx/nginx.conf 
+COPY --from=builder /usr/src/app/nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=builder /app/src/entrypoint.sh /entrypoint.sh
 
