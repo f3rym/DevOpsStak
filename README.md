@@ -1,6 +1,6 @@
 # eto-app
 
-![Images Build](https://github.com/etoosamoe/eto-app/actions/workflows/build.yml/badge.svg)
+![Images Build](https://github.com/f3rym/DevOpsStak/actions/workflows/build.yml/badge.svg)
 
 Simple application to train some programming and DevOps skills. It contains:
 - Backend API (Python, FastAPI, SQLAlchemy, Pydantic)
