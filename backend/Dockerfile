@@ -11,7 +11,7 @@ WORKDIR /app
 COPY --chown=worker:worker requirements.txt requirements.txt
 RUN pip install --user --no-cache-dir -r requirements.txt
 
-ENV PATH="/app/.local/bin:${PATH}"
+ENV PATH="/home/worker/.local/bin:${PATH}"
 
 COPY --chown=worker:worker app/ ./app/
 
