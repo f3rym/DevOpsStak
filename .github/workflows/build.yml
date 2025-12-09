@@ -39,8 +39,8 @@ jobs:
       - name: build + push
         uses: docker/build-push-action@v6
         with: 
-          context: ./${{ matrix.image }}
-          file: Dockerfile
+          context: .
+          file: ./${{ matrix.image }}/Dockerfile
           push: true
           tags: |
             f3rym/eto-${{ matrix.image }}:latest
