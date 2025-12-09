@@ -1,8 +1,6 @@
 services:
   backend:
-    build:
-      context: backend/
-      dockerfile: Dockerfile
+    image: f3rym/eto-backend
     env_file: backend/.env
     ports:
       - 8000:8000
@@ -18,9 +16,7 @@ services:
       retries: 3
       start_period: 3s
   frontend:
-    build:
-      context: frontend
-      dockerfile: Dockerfile
+    image: f3rym/eto-frontend
     env_file: frontend/.env
     restart: always
     ports:
