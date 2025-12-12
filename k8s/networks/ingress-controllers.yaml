@@ -6,6 +6,13 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/app-root: "/"
+    nginx.ingress.kubernetes.io/server-snippet: |
+      if ($request_uri ~* \.(js)$) {
+        add_header Content-Type application/javascript;
+      }
+      if ($request_uri ~* \.(css)$) {
+        add_header Content-Type text/css;
+      }
 spec:
   ingressClassName: nginx
   rules:
