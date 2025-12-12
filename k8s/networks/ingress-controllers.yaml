@@ -7,20 +7,24 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/server-snippet: |
+      location / {
+        try_files $uri $uri/ /index.html;
+      }
 spec:
   ingressClassName: nginx
   rules:
     - http:
         paths:
-          - path: /api(/|$)(.*)   
-            pathType: ImplementationSpecific
+          - path: /api   
+            pathType: Prefix
             backend:
               service:
                 name: backend
                 port:
                   number: 8000
-          - path: /(.*)           
-            pathType: ImplementationSpecific
+          - path: /         
+            pathType: Prefix
             backend:
               service:
                 name: frontend
@@ -29,49 +33,3 @@ spec:
 
 
 
-
-
-
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: ingress-backend
-#   namespace: app
-#   annotations:
-#     nginx.ingress.kubernetes.io/rewrite-target: /
-#     nginx.ingress.kubernetes.io/ssl-redirect: "false"
-# spec:
-#   ingressClassName: nginx
-#   rules:
-#     - http:
-#         paths:
-#           - path: /api
-#             pathType: Prefix
-#             backend:
-#               service:
-#                 name: backend
-#                 port:
-#                   number: 8000
-# ---
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: ingress-frontend
-#   namespace: app
-#   annotations:
-#     nginx.ingress.kubernetes.io/rewrite-target: /
-#     nginx.ingress.kubernetes.io/ssl-redirect: "false"
-# spec:
-#   ingressClassName: nginx
-#   rules:
-#     - http:
-#         paths:
-#           - path: /
-#             pathType: Prefix
-#             backend:
-#               service:
-#                 name: frontend
-#                 port:
-#                   number: 80
-              
-            
