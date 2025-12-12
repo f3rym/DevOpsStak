@@ -5,7 +5,7 @@ metadata:
   namespace: app
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/rewrite-target: /index.html
+    nginx.ingress.kubernetes.io/app-root: "/index.html"
 spec:
   ingressClassName: nginx
   rules:
