@@ -16,7 +16,7 @@ spec:
         app: frontend
     spec:
       containers:
-        - image: eto-frontend
+        - image: f3rym/eto-frontend
           name: frontend-container 
           env:
           - name: REACT_APP_FRONT_VERSION
