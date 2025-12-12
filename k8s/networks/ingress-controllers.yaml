@@ -6,10 +6,6 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/app-root: "/"
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      if ($uri !~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$) {
-        rewrite ^ /index.html last;
-      }
 spec:
   ingressClassName: nginx
   rules:
