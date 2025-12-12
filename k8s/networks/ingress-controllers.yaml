@@ -6,12 +6,16 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/server-snippet: |
+      location / {
+        try_files $uri $uri/ /index.html;
+      }
 spec:
   ingressClassName: nginx
   rules:
     - http:
         paths:
-          - path: /api/   
+          - path: /api   
             pathType: Prefix
             backend:
               service:
