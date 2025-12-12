@@ -5,24 +5,26 @@ metadata:
   namespace: app
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/use-regex: "true"  # ДОБАВИТЬ!
+    nginx.ingress.kubernetes.io/app-root: "/"
 spec:
   ingressClassName: nginx
   rules:
     - http:
         paths:
-          - path: /api(/|$)(.*)   # Теперь есть группы для $2
-            pathType: ImplementationSpecific
+          - path: /api   
+            pathType: Prefix
             backend:
               service:
                 name: backend
                 port:
                   number: 8000
-          - path: /(.*)           # Теперь есть группы для $2
-            pathType: ImplementationSpecific
+          - path: /         
+            pathType: Prefix
             backend:
               service:
                 name: frontend
                 port:
                   number: 80
+
+
+
