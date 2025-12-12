@@ -6,12 +6,10 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/app-root: "/index.html"
-    nginx.ingress.kubernetes.io/server-alias: "*"
 spec:
   ingressClassName: nginx
   rules:
-    - host: "*"
-      http:
+    - http:
         paths:
           - path: /api   
             pathType: Prefix
