@@ -5,13 +5,13 @@ metadata:
   namespace: app
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/app-root: "/"
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
     - http:
         paths:
-          - path: /api   
+          - path: /api/   
             pathType: Prefix
             backend:
               service:
