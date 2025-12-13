@@ -1,0 +1,79 @@
+# default values for my helm chart
+
+global:
+  namespace: app
+
+ingress:
+  appRoot: "/index.html"
+  sslRedirect: "false"
+  rules:
+    pathType: Prefix
+
+backend:
+  path: /api
+  replicaCount: 1
+  version: "1.0.0"
+  image:  f3rym/eto-backend
+  port: 8000
+  uvicornPort: "8000"
+  req:
+    cpu: 100m
+    memory: 256Mi
+  lim:
+    cpu:  500m
+    memory: 512Mi
+  livenessProbe:
+    path: /api/healthcheck
+    port: 8000
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+
+database:
+  secretName: config-secret
+  replicaCount: 1
+  image: postgres:16-alpine
+  port: 5432
+  volume:
+    hostPath: /var/lib/postgresql/data
+    type: DirectoryOrCreate
+    storage: "1Gi"
+    accessMode: ReadWriteOnce
+  mountPath: /var/lib/postgresql/data
+  livenessProbe:
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+  req:
+    cpu: 100m
+    memory: 256Mi
+  lim:
+    cpu:  500m
+    memory: 512Mi
+  secret:
+    user: ZXRvYXBw
+    password: cGFzc3dvcmQ=
+    db: ZXRvYXBw
+    host: ZGI=
+
+frontend:
+  path: /
+  replicaCount: 1
+  version: "1.0.0"
+  image:  f3rym/eto-frontend
+  port: 80
+  req:
+    cpu: 100m
+    memory: 256Mi
+  lim:
+    cpu:  500m
+    memory: 512Mi
+  livenessProbe:
+    path: /
+    port: 80
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3

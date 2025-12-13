@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.global.namespace }}
+  name: {{ .Release.Name }}-frontend
+  labels:
+    app: {{ .Release.Name }}-frontend
+spec:
+  replicas: {{ .Values.frontend.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-frontend
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-frontend
+    spec:
+      containers:
+        - image: {{ .Values.frontend.image }}
+          name: {{ .Release.Name }}-frontend 
+          env:
+          - name: REACT_APP_FRONT_VERSION
+            value: {{ .Values.frontend.version }}
+          ports:
+            - containerPort: {{ .Values.frontend.port }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.frontend.livenessProbe.path }}
+              port: {{ .Values.frontend.livenessProbe.port }}
+            initialDelaySeconds: {{ .Values.frontend.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.frontend.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.frontend.livenessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.frontend.livenessProbe.failureThreshold }}
+          resources:
+            limits:
+              memory: {{ .Values.frontend.lim.memory }}
+              cpu: {{ .Values.frontend.lim.cpu }}
+            requests:
+              memory: {{ .Values.frontend.req.memory }}
+              cpu: {{ .Values.frontend.req.cpu }}
+            
+
+        
+    
